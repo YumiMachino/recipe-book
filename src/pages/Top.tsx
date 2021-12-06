@@ -1,5 +1,5 @@
 const Top = () => {
-  return <div>Top Page</div>;
+  return <div>Top page</div>;
 };
 
 export default Top;
