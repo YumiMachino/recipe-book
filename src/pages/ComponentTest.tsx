@@ -4,7 +4,7 @@ const ComponentTest = () => {
   return (
     <div>
       Test your component here!
-      <Header />
+      <Header isLoggedIn={true} />
     </div>
   );
 };
