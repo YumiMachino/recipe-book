@@ -1,6 +1,9 @@
 import Logo from '../../assets/logo-img.png';
 import { Link } from 'react-router-dom';
 import Button from './Button';
+import { IconContext } from 'react-icons';
+import { IoIosNotificationsOutline } from 'react-icons/io';
+import { HiUserCircle } from 'react-icons/hi';
 
 type HeaderProps = {
   isLoggedIn: boolean;
@@ -19,10 +22,20 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
             <Button isPrimary={false} content='Log in' link='/' />
           </>
         ) : (
-          <button>not logged in</button>
+          <IconContext.Provider
+            value={{
+              className:
+                'text-primary text-4xl mx-3 transform hover:scale-105 transition-transform duration-300',
+            }}
+          >
+            <Link to='/'>
+              <IoIosNotificationsOutline />
+            </Link>
+            <Link to='/'>
+              <HiUserCircle />
+            </Link>
+          </IconContext.Provider>
         )}
-        {/* <Button isPrimary={true} content='Sign up' link='/' />
-        <Button isPrimary={false} content='Log in' link='/' /> */}
       </div>
     </nav>
   );

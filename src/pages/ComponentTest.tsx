@@ -1,3 +1,4 @@
+import Footer from '../components/reusable/Footer';
 import Header from '../components/reusable/Header';
 
 const ComponentTest = () => {
@@ -5,6 +6,8 @@ const ComponentTest = () => {
     <div>
       Test your component here!
       <Header isLoggedIn={true} />
+      <Header isLoggedIn={false} />
+      <Footer />
     </div>
   );
 };

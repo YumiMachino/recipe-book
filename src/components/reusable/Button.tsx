@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <Link to={link}>
       <button
-        className={`px-5 py-3 mx-3 
+        className={`px-5 py-3 mx-3 transform hover:scale-105 transition-transform duration-300
           ${
             isPrimary
               ? 'bg-primary text-secondary'
@@ -28,5 +28,3 @@ const Button: React.FC<ButtonProps> = ({
 };
 
 export default Button;
-
-// Button.defaultProps = defaultProps;
