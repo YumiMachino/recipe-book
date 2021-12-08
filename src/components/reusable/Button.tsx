@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <Link to={link}>
       <button
-        className={`px-4 py-2 mx-3 text-xs  md:px-5 md:py-3   transform hover:scale-105 transition-transform duration-300  
+        className={`px-4 py-2 text-xs  md:px-5 md:py-3 inline-block  transform hover:scale-105 transition-transform duration-300  
           ${
             isPrimary
               ? 'bg-primary text-secondary'

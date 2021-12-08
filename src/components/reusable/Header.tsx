@@ -22,8 +22,12 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
       <div className='flex'>
         {isLoggedIn ? (
           <>
-            <Button isPrimary={true} content='Sign up' link='/' />
-            <Button isPrimary={false} content='Log in' link='/' />
+            <div className='mx-3'>
+              <Button isPrimary={true} content='Sign up' link='/' />
+            </div>
+            <div className='mx-3'>
+              <Button isPrimary={false} content='Log in' link='/' />
+            </div>
           </>
         ) : (
           <IconContext.Provider
