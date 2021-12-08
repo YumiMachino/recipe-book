@@ -11,9 +11,13 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
   return (
-    <nav className='w-screen h-20 bg-secondary px-14 flex justify-between items-center'>
+    <nav className='w-screen h-20 bg-secondary px-1 md:px-14 flex justify-between items-center'>
       <Link to='/'>
-        <img src={Logo} height={200} width={250} alt='Logo' />
+        <img
+          src={Logo}
+          className='w-28 h-10 sm:w-48 sm:h-16 xl:w-64 xl:h-20'
+          alt='Logo'
+        />
       </Link>
       <div className='flex'>
         {isLoggedIn ? (
@@ -25,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
           <IconContext.Provider
             value={{
               className:
-                'text-primary text-4xl mx-3 transform hover:scale-105 transition-transform duration-300',
+                'text-primary text-3xl md:text-4xl mx-3 transform hover:scale-105 transition-transform duration-300',
             }}
           >
             <Link to='/'>
