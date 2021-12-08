@@ -1,5 +1,7 @@
+import Layout from '../components/reusable/Layout';
+
 const Top = () => {
-  return <div>Top page</div>;
+  return <Layout>Top page</Layout>;
 };
 
 export default Top;

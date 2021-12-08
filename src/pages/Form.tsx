@@ -1,5 +1,7 @@
+import Layout from '../components/reusable/Layout';
+
 const Form = () => {
-  return <div>Form page</div>;
+  return <Layout>Form page</Layout>;
 };
 
 export default Form;

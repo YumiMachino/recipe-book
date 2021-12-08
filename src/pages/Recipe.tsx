@@ -1,5 +1,7 @@
+import Layout from '../components/reusable/Layout';
+
 const Recipe = () => {
-  return <div>Recipe page</div>;
+  return <Layout>Recipe page</Layout>;
 };
 
 export default Recipe;
