@@ -1,5 +1,7 @@
+import Layout from '../components/reusable/Layout';
+
 const SignUp = () => {
-  return <div>Sign Up Page</div>;
+  return <Layout>Sign Up Page</Layout>;
 };
 
 export default SignUp;
