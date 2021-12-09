@@ -1,11 +1,13 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
+
 import Top from './pages/Top';
 import SearchResult from './pages/SearchResult';
 import MyPage from './pages/MyPage';
 import Form from './pages/Form';
 import SignUp from './pages/SignUp';
 import ComponentTest from './pages/ComponentTest';
+import Recipe from './pages/Recipe';
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Top />} />
         <Route path='/results' element={<SearchResult />} />
+        <Route path='/results/:id' element={<Recipe />} />{' '}
         <Route path='mypage' element={<MyPage />} />
         <Route path='form' element={<Form />} />
         <Route path='signUp' element={<SignUp />} />
