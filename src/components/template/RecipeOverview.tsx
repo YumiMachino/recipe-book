@@ -122,7 +122,7 @@ const RecipeOverview = (props: RecipeOverViewProps) => {
   return (
     <div className='flex flex-col w-9/12 mx-auto p-2 sm:flex-row sm:justify-center sm:items-center lg:w-8/12'>
       <div className=' w-full h-2/6 sm:w-6/12 lg:w-5/12'>
-        <img src={demoImg} alt='Recipe' />
+        <img src={demoImg} alt='Recipe' className='rounded' />
       </div>
       <div className='sm:w-6/12 p-2'>
         {renderShareBtns()}
