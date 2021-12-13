@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import demoImg from '../../assets/demo.jpg';
-import { FaRegHeart, FaHeart, FaShareAlt } from 'react-icons/fa';
-import { FacebookShareButton } from 'react-share';
-import { FacebookIcon } from 'react-share';
+import { FaRegHeart, FaHeart } from 'react-icons/fa';
+
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  LineShareButton,
+  LineIcon,
+} from 'react-share';
 
 // Get Recipe Object
 type RecipeOverViewProps = {
@@ -20,9 +27,12 @@ type RecipeOverViewProps = {
 } & typeof defaultProps;
 
 const defaultProps = {
+  id: 'sdfsdfsr',
+  category: 'Italian',
   name: 'Tomato Source Pasta',
   description: "Delicious tomato source pasta!'",
   image: null,
+  date: 'December 17, 1995 03:24:00',
   creator: 'Yumi Machino',
   ingredients: [
     {
@@ -42,7 +52,9 @@ const defaultProps = {
       quantity: '300g',
     },
   ],
+  recipe: [{}],
   favCounts: 300,
+  favUsers: [{}],
 };
 
 // check if user favs this recipe
@@ -53,14 +65,14 @@ const RecipeOverview = (props: RecipeOverViewProps) => {
 
   const [isFav, setIsFav] = useState<boolean>(false);
 
+  const [url, setUrl] = useState(
+    'https://cookpad.com/uk/recipes/11956818-dairy-free-berry-bread-and-butter-pudding?ref=guest_feed'
+  );
+
   const toggleFav = (): void => {
     setIsFav(!isFav);
     // Add fav recipe to User obj
-    // Increase fav count on recipe obj
-  };
-
-  const shareClicked = (): void => {
-    console.log('share clicked');
+    // Increase fav count on recipe obj, and add userId to recipe Obj
   };
 
   const renderIngredients = () => {
@@ -77,37 +89,49 @@ const RecipeOverview = (props: RecipeOverViewProps) => {
     });
   };
 
+  const renderShareBtns = () => {
+    return (
+      <div className='flex justify-end'>
+        <button
+          className='text-primary hover:text-accent mx-1'
+          onClick={toggleFav}
+        >
+          {isFav ? (
+            <FaHeart className='text-2xl' />
+          ) : (
+            <FaRegHeart className='text-2xl text-accent' />
+          )}
+        </button>
+        <FacebookShareButton
+          url={url}
+          title={name}
+          className='mx-1 hover:scale-125'
+        >
+          <FacebookIcon size={32} round={true} />
+        </FacebookShareButton>
+        <TwitterShareButton url={url} title={name} className='mx-1'>
+          <TwitterIcon size={32} round={true} />
+        </TwitterShareButton>
+        <LineShareButton url={url} title={name} className='mx-1'>
+          <LineIcon size={32} round={true} />
+        </LineShareButton>
+      </div>
+    );
+  };
+
   return (
     <div className='flex flex-col w-9/12 mx-auto p-2 sm:flex-row sm:justify-center sm:items-center lg:w-8/12'>
       <div className=' w-full h-2/6 sm:w-6/12 lg:w-5/12'>
         <img src={demoImg} alt='Recipe' />
       </div>
       <div className='sm:w-6/12 p-2'>
+        {renderShareBtns()}
         <div className=' relative p-2'>
           <h3 className='text-sm sm:text-base text-dark font-semibold lg:text-2xl'>
             {name}
           </h3>
           <p className='text-xs sm:text-sm text-dark lg:text-lg'>{creator}</p>
           <p className='text-xs text-dark lg:text-base'>{description}</p>
-          <button
-            className='absolute top-0 right-8 sm:right-12 text-primary hover:text-accent'
-            onClick={toggleFav}
-          >
-            {isFav ? (
-              <FaHeart className='text-lg' />
-            ) : (
-              <FaRegHeart className='text-lg text-accent' />
-            )}
-          </button>
-          <button
-            className='absolute top-0 right-1 sm:right-3 text-primary hover:text-dark'
-            onClick={shareClicked}
-          >
-            <FaShareAlt className='text-lg' />
-          </button>
-          <FacebookShareButton url=''>
-            <FacebookIcon size={32} round={true} />
-          </FacebookShareButton>
         </div>
         <div className='p-2'>
           <h4 className='text-base text-dark font-semibold lg:text-2xl'>
