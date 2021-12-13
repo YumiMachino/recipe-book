@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import demoImg from '../../assets/demo.jpg';
 import { FaRegHeart, FaHeart, FaShareAlt } from 'react-icons/fa';
+import { FacebookShareButton } from 'react-share';
+import { FacebookIcon } from 'react-share';
 
 // Get Recipe Object
 type RecipeOverViewProps = {
@@ -66,7 +68,7 @@ const RecipeOverview = (props: RecipeOverViewProps) => {
       return (
         <div
           key={ingredient.ingredient}
-          className='text-sm text-dark bg-secondary rounded-sm my-1 lg:text-base flex justify-between'
+          className='text-sm text-dark bg-secondary rounded-sm my-1 lg:text-base flex justify-between p-px'
         >
           <p>{ingredient.ingredient}</p>
           <p>{ingredient.quantity}</p>
@@ -82,23 +84,30 @@ const RecipeOverview = (props: RecipeOverViewProps) => {
       </div>
       <div className='sm:w-6/12 p-2'>
         <div className=' relative p-2'>
-          <h3 className='text-base text-dark font-semibold lg:text-2xl'>
+          <h3 className='text-sm sm:text-base text-dark font-semibold lg:text-2xl'>
             {name}
           </h3>
-          <p className='text-sm text-dark lg:text-lg'>{creator}</p>
+          <p className='text-xs sm:text-sm text-dark lg:text-lg'>{creator}</p>
           <p className='text-xs text-dark lg:text-base'>{description}</p>
           <button
-            className='absolute top-1 right-12 text-primary hover:text-accent'
+            className='absolute top-0 right-8 sm:right-12 text-primary hover:text-accent'
             onClick={toggleFav}
           >
-            {isFav ? <FaHeart size={26} /> : <FaRegHeart size={26} />}
+            {isFav ? (
+              <FaHeart className='text-lg' />
+            ) : (
+              <FaRegHeart className='text-lg text-accent' />
+            )}
           </button>
           <button
-            className='absolute top-1 right-3 text-primary hover:text-dark'
+            className='absolute top-0 right-1 sm:right-3 text-primary hover:text-dark'
             onClick={shareClicked}
           >
-            <FaShareAlt size={26} />
+            <FaShareAlt className='text-lg' />
           </button>
+          <FacebookShareButton url=''>
+            <FacebookIcon size={32} round={true} />
+          </FacebookShareButton>
         </div>
         <div className='p-2'>
           <h4 className='text-base text-dark font-semibold lg:text-2xl'>
