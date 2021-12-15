@@ -13,9 +13,9 @@ const RecipeDetail: React.FC<RecipeDetailProps> = ({
   image,
 }) => {
   return (
-    <div className='w-11/12 h-44 mx-auto flex md:w-4/5 lg:w-2/3 border-solid border border-primary my-1 rounded'>
-      <h5 className='text-lg text-dark p-1'>{order}.</h5>
-      <div className='w-5/12 m-auto sm:w-2/6 md:w-1/4 '>
+    <div className='w-11/12 h-24  mx-auto flex md:w-4/5 lg:w-2/3 border-solid border border-primary my-1 rounded'>
+      <h5 className='text-lg text-dark p-1 ml-1'>{order}.</h5>
+      <div className='w-32  m-auto '>
         <img src={demoImg} alt='Recipe' className='m-1 rounded' />
       </div>
       <div className='w-7/12 m-auto p-1  '>

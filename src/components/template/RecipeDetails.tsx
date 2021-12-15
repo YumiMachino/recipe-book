@@ -37,7 +37,7 @@ const RecipeDetails = (props: RecipeDetailsProps) => {
 
   return (
     <div className='w-full h-fit mx-auto'>
-      <h1 className='text-lg font-medium text-primary text-center p-1'>
+      <h1 className='text-xl font-medium text-primary text-center py-2 md:py-6'>
         Recipes
       </h1>
       <div>

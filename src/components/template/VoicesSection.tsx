@@ -71,7 +71,7 @@ const VoicesSection = (props: VoiceSectionProps) => {
       <h1 className='text-xl font-medium text-primary text-center py-2 md:py-6'>
         Voices
       </h1>
-      <div className='text-base xl:w-10/12 2xl:w-9/12 mx-auto bg-secondary text-dark flex flex-col justify-center items-center space-y-2 p-2 md:p-6'>
+      <div className='text-base xl:w-10/12 2xl:w-9/12 mx-auto bg-secondary text-dark flex  justify-around items-center space-y-2 p-2 md:p-6 '>
         <h2>
           Did you like the recipe? <br />{' '}
           <span className='hidden md:block'>
