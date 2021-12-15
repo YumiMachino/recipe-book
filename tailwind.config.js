@@ -10,10 +10,13 @@ module.exports = {
         dark: '#4F2D07',
         white: '#fff',
         accent: '#A83E3E',
+        mainHeading: '#373F41',
+        subHeading: '#737B7D',
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         mulish: ['Mulish', 'sans-serif'],
+        main: ['Work Sans'],
       },
     },
   },
