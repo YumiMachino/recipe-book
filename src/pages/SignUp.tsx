@@ -10,12 +10,13 @@ const SignUp = () => {
 
   return (
     <Layout>
-      <div className='flex lg:w-4/5 lg:mx-auto bg-green-500'>
-        <div className='hidden lg:block bg-green-300 m-1'>
+      <div className='flex  h-96 w-4/5 items-center lg:w-4/5 lg:mx-auto absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2'>
+        <div className='hidden  lg:block  m-1 p-3'>
           <img src={demoImg} alt='Recipe' className='rounded' />
         </div>
-        <div className='w-4/5 h-80 my-auto bg-pink-400 mx-auto flex flex-col p-1'>
-          <h1 className='text-lg text-primary p-2 text-center  '>
+
+        <div className='w-11/12 h-full sm:w-8/12  mx-auto flex flex-col p-4 m-1 sm:border border-seconary rounded '>
+          <h1 className='text-lg text-primary p-2 text-center '>
             <button
               className={
                 isLogin ? 'text-secondary' : 'text-primary font-semibold'
@@ -34,7 +35,7 @@ const SignUp = () => {
               Login
             </button>
           </h1>
-          <SignUpLogIn isLogin={false} />
+          <SignUpLogIn isLogin={isLogin} />
         </div>
       </div>
     </Layout>
