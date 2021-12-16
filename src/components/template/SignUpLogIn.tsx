@@ -25,8 +25,6 @@ const SignUpLogIn: React.FC<SignUpLoginProps> = ({ isLogin }) => {
     console.log('Logging in...');
   };
 
-  const logOut = async () => {};
-
   const test = () => {
     console.log('Here, we can do firebase auth using sns....');
   };
@@ -51,7 +49,7 @@ const SignUpLogIn: React.FC<SignUpLoginProps> = ({ isLogin }) => {
             onChange={handleChange}
             value={userData.email}
             name='email'
-            className='text-dark bg-secondary p-2 placeholder-gray-400 text-sm rounded focus:outline-none focus:border-primary 
+            className='text-dark bg-secondary p-2 placeholder-gray-400 text-sm rounded focus:outline-none 
               required'
           />
         </div>
@@ -63,7 +61,7 @@ const SignUpLogIn: React.FC<SignUpLoginProps> = ({ isLogin }) => {
             onChange={handleChange}
             value={userData.password}
             name='password'
-            className='text-dark bg-secondary p-2 placeholder-gray-400 text-sm rounded focus:outline-none focus:border-primary '
+            className='text-dark bg-secondary p-2 placeholder-primary-400 text-sm rounded focus:outline-none  '
             required
           />
         </div>

@@ -16,10 +16,12 @@ const SignUp = () => {
         </div>
 
         <div className='w-11/12 h-full sm:w-8/12  mx-auto flex flex-col p-4 m-1 sm:border border-seconary rounded '>
-          <h1 className='text-lg text-primary p-2 text-center '>
+          <h1 className='text-lg text-secondary p-2 text-center '>
             <button
               className={
-                isLogin ? 'text-secondary' : 'text-primary font-semibold'
+                isLogin
+                  ? 'text-primary opacity-50'
+                  : 'text-dark font-semibold opacity-100'
               }
               onClick={() => setIsLogin(false)}
             >
@@ -28,7 +30,9 @@ const SignUp = () => {
             /{' '}
             <button
               className={
-                isLogin ? 'text-primary font-semibold' : 'text-secondary'
+                isLogin
+                  ? 'text-dark font-semibold  opacity-100'
+                  : 'text-primary opacity-50'
               }
               onClick={() => setIsLogin(true)}
             >
