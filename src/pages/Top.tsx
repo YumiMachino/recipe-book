@@ -2,6 +2,7 @@ import Layout from "../components/reusable/Layout";
 import Hero from "../components/reusable/Hero";
 import CategorySection from "../components/template/CategorySection";
 import Featured from "../components/template/Featured";
+import PostSection from "../components/template/PostSection";
 
 const Top = () => {
   return (
@@ -9,6 +10,7 @@ const Top = () => {
       <Hero />
       <CategorySection />
       <Featured />
+      <PostSection />
     </Layout>
   );
 };
