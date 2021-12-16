@@ -1,13 +1,11 @@
 type MainHeadingProps = {
   text: string;
+  color: string;
 };
 
-const MainHeading: React.FC<MainHeadingProps> = ({ text }) => {
-  return (
-    <>
-      <p className="font-main font-bold text-3xl text-mainHeading">{text}</p>
-    </>
-  );
+const MainHeading: React.FC<MainHeadingProps> = ({ text, color }) => {
+  const style = `font-main font-bold text-3xl ${color}`;
+  return <p className={style}>{text}</p>;
 };
 
 export default MainHeading;
