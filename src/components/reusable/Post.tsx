@@ -3,6 +3,8 @@ import Button from "./Button";
 
 // Get Recipe Object
 export type PostProps = {
+  id: number;
+  category: string;
   name: string;
   description: string;
 } & typeof defaultProps;
