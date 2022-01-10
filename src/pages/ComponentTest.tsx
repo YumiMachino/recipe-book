@@ -1,6 +1,6 @@
-import Footer from '../components/reusable/Footer';
-import Header from '../components/reusable/Header';
-import Post from '../components/reusable/Post';
+import Footer from "../components/reusable/Footer";
+import Header from "../components/reusable/Header";
+import Post from "../components/reusable/Post";
 
 const ComponentTest = () => {
   return (
@@ -8,7 +8,7 @@ const ComponentTest = () => {
       Test your component here!
       <Header isLoggedIn={true} />
       <Header isLoggedIn={false} />
-      <Post />
+      {/* <Post /> */}
       <Footer />
     </div>
   );
