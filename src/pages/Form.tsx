@@ -2,57 +2,81 @@ import { useState } from 'react';
 import Button from '../components/reusable/Button';
 import Layout from '../components/reusable/Layout';
 import { TiDelete } from 'react-icons/ti';
+import {
+  RecipeDataType,
+  initialState,
+  IngredientDataType,
+} from '../data/DataType';
 
-export interface RecipeDetailType {
-  order: number;
-  process: string;
-  image?: null;
-}
-
-export interface RecipeDataType {
-  category: string;
-  name: string;
-  description: string;
-  date: Date;
-  image?: string;
-  creator: string;
-  ingredients: [
-    {
-      ingredient: string;
-      quantity: string;
-    }
-  ];
-  recipe: [RecipeDetailType];
-  favoriteCounts: number;
-}
+// use useeffect to update creator, date of the initialState
 
 const Form = () => {
   // useSatate to hold the recipe obj data
-  const [recipeData, setRecipeData] = useState<RecipeDataType>({
-    category: '',
-    name: '',
-    description: '',
-    date: new Date(),
-    image: '',
-    creator: 'Jane Doe',
-    ingredients: [
-      {
-        ingredient: '',
-        quantity: '',
-      },
-    ],
-    recipe: [
-      {
-        order: 1,
-        process: '',
-        image: null,
-      },
-    ],
-    favoriteCounts: 0,
-  });
+  const [recipeData, setRecipeData] = useState<RecipeDataType>(initialState);
+
+  const [ingredients, setIngredients] = useState<IngredientDataType[]>([
+    {
+      ingredient: '',
+      quantity: '',
+    },
+  ]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    console.log('Changing...');
+    console.log(e.target.name, e.target.value);
+    console.log(e.target.name.includes('ingredients'));
+    if (e.target.name.includes('ingredients')) {
+      console.log(e.target.name.slice(11, 13));
+      const idx = parseInt(e.target.name.slice(11, 13));
+      const newItem = {
+        ingredient: e.target.value,
+        quantity: e.target.value,
+      };
+      setIngredients(ingredients.splice(idx, 0, newItem));
+
+      // mutate idx of the array!!
+      // setIngredients([
+      //   ...ingredients,
+      //   {
+      //     ingredient: e.target.value,
+      //     quantity: e.target.value,
+      //   },
+      // ]);
+
+      // append to the data
+      setRecipeData({
+        ...recipeData,
+        ingredients: ingredients,
+      });
+    }
+    // if(e.target.name)
+    // setRecipeData({
+    //   ...recipeData,
+    //   [e.target.name]: e.target.value,
+    //   ingredients: [
+    //     ...recipeData.ingredients,
+    //     {
+    //       ingredient: '',
+    //       quantity: '',
+    //     },
+    //   ],
+    // });
+  };
 
   const addIngredientsClicked = () => {
-    console.log('Add ingredients cicked');
+    // useStateのingredientに追加する
+    setRecipeData({
+      ...recipeData,
+      ingredients: [
+        ...recipeData.ingredients,
+        {
+          ingredient: '',
+          quantity: '',
+        },
+      ],
+    });
   };
 
   const addRecipeStepsClicked = () => {
@@ -73,122 +97,61 @@ const Form = () => {
 
   // state内のingredientsの数loopしてrowとdataを返す関数
   const renderIngredients = () => {
-    // if(recipeData.ingredients[0].ingredient === "")
-
-    return recipeData.ingredients.map((ingredient) =>
-      console.log('this is ingredient', ingredient)
-    );
+    return recipeData.ingredients.map((ingredient, idx) => {
+      console.log('inside the map', ingredient);
+      return (
+        <tr className=''>
+          <td className='w-1/2'>
+            <input
+              type='text'
+              placeholder='e.g. potato'
+              className='w-full bg-secondary text-dark text-sm p-2 rounded outline-none'
+              name={`ingredients ${idx} ingredient`}
+              value={ingredient.ingredient}
+              onChange={handleChange}
+            />
+          </td>
+          <td className='w-2/6'>
+            <input
+              type='text'
+              placeholder='e.g. 3'
+              className='w-full bg-secondary
+                      text-dark
+                      text-sm
+                      p-2
+                      rounded
+                      outline-none'
+              name={`ingredients ${idx} quantity`}
+              value={ingredient.quantity}
+              onChange={handleChange}
+            />
+          </td>
+          <td className='w-1/6 text-center text-primary'>
+            <button
+              className='w-full p-1 rounded bg-secondary'
+              onClick={deleteClicked}
+            >
+              <TiDelete
+                className='text-2xl w-full bg-secondary
+                      text-dark
+                      rounded
+                      outline-none'
+              />
+            </button>
+          </td>
+        </tr>
+      );
+    });
   };
-
-  const temp = () => {
-    return (
-      <>
-        <tr className=''>
-          <td className='w-1/2'>
-            <input
-              type='text'
-              placeholder='Potatos'
-              className='w-full bg-secondary text-dark text-sm p-2 rounded outline-none'
-              name='ingredient'
-            />
-          </td>
-          <td className='w-2/6'>
-            <input
-              type='text'
-              placeholder='3'
-              className='w-full bg-secondary
-                      text-dark
-                      text-sm
-                      p-2
-                      rounded
-                      outline-none'
-              name='quantity'
-            />
-          </td>
-          <td className='w-1/6 text-center text-primary'>
-            <button className='w-full p-1 rounded bg-secondary'>
-              <TiDelete
-                className='text-2xl w-full bg-secondary
-                      text-dark
-                      rounded
-                      outline-none'
-              />
-            </button>
-          </td>
-        </tr>
-        <tr className=''>
-          <td className='w-1/2'>
-            <input
-              type='text'
-              placeholder='Onions'
-              className='w-full bg-secondary text-dark text-sm p-2 rounded outline-none'
-            />
-          </td>
-          <td className='w-2/6'>
-            <input
-              type='text'
-              placeholder='2'
-              className='w-full bg-secondary
-                      text-dark
-                      text-sm
-                      p-2
-                      rounded
-                      outline-none'
-            />
-          </td>
-          <td className='w-1/6 text-center text-primary'>
-            <button className='w-full p-1 rounded bg-secondary'>
-              <TiDelete
-                className='text-2xl w-full bg-secondary
-                      text-dark
-                      rounded
-                      outline-none'
-              />
-            </button>
-          </td>
-        </tr>
-        <tr className=''>
-          <td className='w-1/2'>
-            <input
-              type='text'
-              placeholder='Miso paste'
-              className='w-full bg-secondary text-dark text-sm p-2 rounded outline-none'
-            />
-          </td>
-          <td className='w-2/6'>
-            <input
-              type='text'
-              placeholder='3 big spoons'
-              className='w-full bg-secondary
-                      text-dark
-                      text-sm
-                      p-2
-                      rounded
-                      outline-none'
-            />
-          </td>
-          <td className='w-1/6 text-center text-primary'>
-            <button className='w-full p-1 rounded bg-secondary hover:text-accent'>
-              <TiDelete
-                className='text-2xl w-full bg-secondary
-                      text-dark
-                      rounded
-                      outline-none'
-              />
-            </button>
-          </td>
-        </tr>
-      </>
-    );
-  };
-
-  renderIngredients();
 
   // state内のstepの数をloopsしてrowとdataを返す関数
 
   return (
     <Layout>
-      <div className='w-full sm:w-4/5 lg:w-3/5 mx-auto p-1 my-2 md:my-9 flex flex-col justify-between'>
+      <form
+        className='w-full sm:w-4/5 lg:w-3/5 mx-auto p-1 my-2 md:my-9 flex flex-col justify-between'
+        onSubmit={() => console.log('Submitted')}
+      >
         <h1 className='text-xl lg:text-3xl text-dark font-semibold text-center p-2'>
           Share your recipe!
         </h1>
@@ -199,7 +162,8 @@ const Form = () => {
               type='text'
               placeholder='e.g. Miso Soup'
               className='text-sm p-2 rounded outline-none text-dark bg-secondary'
-              name='title'
+              name='name'
+              onChange={handleChange}
             />
           </div>
           <div className='text-dark text-sm my-1 flex flex-col'>
@@ -210,6 +174,7 @@ const Form = () => {
               placeholder='e.g. Traditional soup made of soybean, this is a recipe my mother taught me'
               className='text-sm p-2 rounded outline-none text-dark bg-secondary max-h-16'
               name='description'
+              onChange={handleChange}
             />
           </div>
           <div className='text-dark text-sm my-1 flex flex-col'>
@@ -221,6 +186,7 @@ const Form = () => {
               placeholder='e.g. Japanese'
               className='text-sm p-2 rounded outline-none text-dark bg-secondary'
               name='category'
+              onChange={handleChange}
             />
           </div>
           <div className='text-dark text-sm flex my-1 flex-col'>
@@ -229,6 +195,7 @@ const Form = () => {
               type='file'
               className='text-sm p-2 rounded outline-none text-dark bg-secondary'
               name='look'
+              onChange={handleChange}
             />
           </div>
 
@@ -239,29 +206,31 @@ const Form = () => {
                 <p>Serving</p>
                 <input
                   type='text'
-                  placeholder='4'
+                  placeholder='e.g. 4'
                   className='w-full bg-secondary text-dark text-sm p-1 rounded outline-none'
                   name='serving'
+                  onChange={handleChange}
                 />
               </div>
               <div className='w-1/2 p-1'>
                 <p>Cooking time</p>
                 <input
                   type='text'
-                  placeholder='30 mins'
+                  placeholder='e.g. 30 mins'
                   className='w-full bg-secondary text-dark text-sm p-1 rounded outline-none'
                   name='cookingTime'
+                  onChange={handleChange}
                 />
               </div>
             </div>
             <table className='table-fixed w-full my-2'>
-              <tbody className=''>{temp()}</tbody>
+              <tbody className=''>{renderIngredients()}</tbody>
             </table>
             <div className='text-center my-2'>
               <Button
                 isPrimary={false}
                 content='+ Add ingredient'
-                clickHandler={() => console.log('add ingredient clicked')}
+                clickHandler={addIngredientsClicked}
               />
             </div>
           </div>
@@ -395,7 +364,7 @@ const Form = () => {
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </Layout>
   );
 };
