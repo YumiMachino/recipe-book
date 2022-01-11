@@ -1,16 +1,13 @@
-// Data type for Recipe
+// Data type for Form
 export interface RecipeDataType {
-  category: string;
   name: string;
-  description?: string;
-  date: Date;
+  description: string;
+  category: string;
   image?: string;
-  creator: string;
   serving?: number;
-  cookingTime?: string;
+  cookingTime: string;
   ingredients: IngredientDataType[];
-  recipe: RecipeDetailType[];
-  favoriteCounts: number;
+  recipe: RecipeStepDataType[];
 }
 
 export interface IngredientDataType {
@@ -18,41 +15,21 @@ export interface IngredientDataType {
   quantity: string;
 }
 
-export interface RecipeDetailType {
+export interface RecipeStepDataType {
   order: number;
   process: string;
   image?: string;
 }
 
-// hooks form
-// 1. Recipe Data (useForm)
-//     category, name, description, date, image, creator, serving, cookingTime, favorite count
-
-// 2. Ingredients Data (useFieldArray)
-//     ingredients:[{}]
-
-// 3. Recipe Data
-//    recipe: [{}]
-
 // initial data for recipe form page
-export const initialState: RecipeDataType = {
-  category: '',
+export const formInitialState: RecipeDataType = {
   name: '',
   description: '',
-  date: new Date(),
-  image: '',
-  creator: 'Jane Doe',
-  serving: 0,
+  category: '',
+  image: undefined,
+  serving: undefined,
   cookingTime: '',
   ingredients: [
-    {
-      ingredient: '',
-      quantity: '',
-    },
-    {
-      ingredient: '',
-      quantity: '',
-    },
     {
       ingredient: '',
       quantity: '',
@@ -62,20 +39,7 @@ export const initialState: RecipeDataType = {
     {
       order: 1,
       process: '',
-      image: '',
-    },
-    {
-      order: 2,
-      process: '',
-      image: '',
-    },
-    {
-      order: 3,
-      process: '',
-      image: '',
+      image: undefined,
     },
   ],
-  favoriteCounts: 0,
 };
-
-// Data type for User
