@@ -26,7 +26,7 @@ const Form = () => {
     <Layout>
       <FormProvider {...methods}>
         <form
-          className='w-full sm:w-4/5 lg:w-3/5 mx-auto p-1 my-2 md:my-9 flex flex-col justify-between'
+          className='w-full sm:w-4/5 lg:w-3/5 mx-auto p-1  mt-2 md:mt-9 flex flex-col justify-between'
           onSubmit={methods.handleSubmit(onSubmit)}
         >
           <h1 className='text-xl lg:text-3xl text-dark font-semibold text-center p-2'>
@@ -44,21 +44,20 @@ const Form = () => {
             </div>
           </div>
 
-          <div className='h-5/6 flex flex-col justify-around px-3'>
-            <div className='flex flex-col sm:flex-row my-6 h-20 w-4/5 justify-between mx-auto'>
-              <div className='flex flex-col  h-20  w-4/5 sm:w-2/5 justify-between mx-auto sm:justify-center '>
-                <Button
-                  isPrimary={true}
-                  content='Save'
-                  clickHandler={saveClicked}
-                />
-              </div>
-              <div className='flex flex-col h-20 w-4/5 sm:w-2/5 justify-between mx-auto sm:justify-center'>
-                <Button isPrimary={false} content='Submit' />
-              </div>
-            </div>
+          <div className='flex flex-col  h-12  w-4/5 justify-between mx-auto sm:justify-center mt-4'>
+            <Button isPrimary={false} content='Submit' />
           </div>
         </form>
+
+        <div className='w-full sm:w-4/5 lg:w-3/5  p-1 mx-auto  mb-4'>
+          <div className='flex flex-col  h-12 w-4/5 justify-between mx-auto sm:justify-center '>
+            <Button
+              isPrimary={true}
+              content='Save'
+              clickHandler={saveClicked}
+            />
+          </div>
+        </div>
       </FormProvider>
     </Layout>
   );
