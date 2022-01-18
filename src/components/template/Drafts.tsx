@@ -12,6 +12,22 @@ const Drafts = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
@@ -19,10 +35,10 @@ const Drafts = () => {
       <Slider {...settings}>
         {data.map((item, index) => (
           <>
-            <div className="flex">
-              <img width={100} height={100} src={item.image} />
-              <div>
-                <p>{item.title}</p>
+            <div className="flex justify-center items-center">
+              <img width={150} height={150} src={item.image} />
+              <div className="text-left mx-2">
+                <p className="font-main text-xl font-bold mb-3">{item.title}</p>
                 <Button isPrimary={false} content="Edit" link="/">
                   Edit
                 </Button>

@@ -13,7 +13,7 @@ const AddButton: React.FC<any> = () => (
 const MyPost = () => {
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 m-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 m-10 justify-items-center">
         {data.map((item, index) => (
           <Category key={index} title={item.title} image={item.image} />
         ))}

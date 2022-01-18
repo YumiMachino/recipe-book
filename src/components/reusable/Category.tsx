@@ -8,7 +8,7 @@ export type CategoryType = {
 
 const Category: React.FC<CategoryType> = ({ title, image }) => {
   const navigate = useNavigate();
-  const showTitle = `${title}\nfood`;
+  // const showTitle = `${title}\nfood`;
 
   const handleClick = () => {
     navigate(`../results/${title}`);
@@ -20,8 +20,8 @@ const Category: React.FC<CategoryType> = ({ title, image }) => {
       onClick={() => handleClick()}
     >
       <img className="m-0 object-cover" src={image} />
-      <p className="font-main text-white absolute bottom-0 right-2 whitespace-pre-wrap font-semibold text-2xl text-center">
-        {showTitle}
+      <p className="font-main text-white absolute bottom-0 right-2 whitespace-pre-wrap font-semibold text-2xl text-center m-3">
+        {title}
       </p>
     </button>
   );

@@ -1,6 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 import MainHeading from "../reusable/MainHeading";
-import { AreaChart, Area, XAxis, YAxis } from "recharts";
+import { AreaChart, Area, XAxis, YAxis, ResponsiveContainer } from "recharts";
 
 const data = [
   {
@@ -55,26 +55,37 @@ const Hisotry = () => {
   return (
     <>
       {isMobile ? (
-        <div className="flex flex-col items-center justify-center gap-6 px-12 py-16"></div>
+        <div className="flex flex-col align-center justify-center mt-12">
+          <p className="font-main font-bold text-2xl mb-8">
+            You're at {LEVEL} level
+          </p>
+          <h3 className="mb-3 text-xl">There are</h3>
+          <MainHeading text={RECIPE_COUNT} color="text-mainHeading" />
+          <h3 className="mt-3 text-xl">recipes you know how to cook!</h3>
+        </div>
       ) : (
         <div className="grid grid-cols-2 gap-16 px-32 py-24">
-          <div>
-            <h1>You're at {LEVEL} level</h1>
-            <h3>There are</h3>
+          <div className="text-left">
+            <p className="font-main font-bold text-2xl mb-8">
+              You're at {LEVEL} level
+            </p>
+            <h3 className="mb-3 text-xl">There are</h3>
             <MainHeading text={RECIPE_COUNT} color="text-mainHeading" />
-            <h3>recipes you know how to cook!</h3>
+            <h3 className="mt-3 text-xl">recipes you know how to cook!</h3>
           </div>
-          <div>
-            <AreaChart width={730} height={250} data={data}>
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Area
-                type="monotone"
-                dataKey="uv"
-                stroke="#A8763E"
-                fill="#F6F1EC"
-              />
-            </AreaChart>
+          <div className="">
+            <ResponsiveContainer width="100%" height={250}>
+              <AreaChart width={500} height={250} data={data}>
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Area
+                  type="monotone"
+                  dataKey="uv"
+                  stroke="#A8763E"
+                  fill="#F6F1EC"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
         </div>
       )}
