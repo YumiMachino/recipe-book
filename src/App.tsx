@@ -14,7 +14,7 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<Top />} />
-        <Route path='/results/:category' element={<SearchResult />} />
+        {/* <Route path='/results/:category' element={<SearchResult />} /> */}
         <Route path='/results/:id' element={<Recipe />} />{' '}
         <Route path='mypage' element={<MyPage />} />
         <Route path='form' element={<Form />} />
