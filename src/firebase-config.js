@@ -2,8 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  // put it to environment variable!!!
-  apiKey: 'AIzaSyC5OR-I8elz8bqXDQ8pJe-G_jE0lIoQM64',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: 'recipe-book-72f56.firebaseapp.com',
   projectId: 'recipe-book-72f56',
   storageBucket: 'recipe-book-72f56.appspot.com',
