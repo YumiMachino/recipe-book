@@ -1,6 +1,7 @@
 import Button from '../reusable/Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
-
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase-config';
 type SignUpLoginProps = {
   isLogin: boolean;
 };
@@ -17,14 +18,28 @@ const SignUpLogIn: React.FC<SignUpLoginProps> = ({ isLogin }) => {
     formState: { errors },
   } = useForm<UserDataType>();
 
-  const onSignUp: SubmitHandler<UserDataType> = (data) =>
+  const onSignUp: SubmitHandler<UserDataType> = async (data) => {
     console.log('Sign up', data);
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  const onLogin: SubmitHandler<UserDataType> = (data) =>
+  const onLogin: SubmitHandler<UserDataType> = async (data) =>
     console.log('This is login', data);
 
-  const test = () => {
-    console.log('Here, we can do firebase auth using sns....');
+  const logOut = async () => {
+    console.log('logging out');
+  };
+  const test = async () => {
+    console.log('logging out');
   };
 
   return (
