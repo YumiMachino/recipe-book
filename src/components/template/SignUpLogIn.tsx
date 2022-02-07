@@ -1,7 +1,14 @@
 import Button from '../reusable/Button';
+import GoogleButton from 'react-google-button';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+
 import { auth } from '../../firebase-config';
+import { Link } from 'react-router-dom';
+
 type SignUpLoginProps = {
   isLogin: boolean;
 };
@@ -11,7 +18,7 @@ export interface UserDataType {
   password: string;
 }
 
-const SignUpLogIn: React.FC<SignUpLoginProps> = ({ isLogin }) => {
+const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
   const {
     register,
     handleSubmit,
@@ -19,28 +26,30 @@ const SignUpLogIn: React.FC<SignUpLoginProps> = ({ isLogin }) => {
   } = useForm<UserDataType>();
 
   const onSignUp: SubmitHandler<UserDataType> = async (data) => {
-    console.log('Sign up', data);
+    console.log('Signing up...');
     try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-      console.log(user);
-    } catch (error) {
-      console.log(error);
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  const onLogin: SubmitHandler<UserDataType> = async (data) =>
-    console.log('This is login', data);
+  const onLogin: SubmitHandler<UserDataType> = async (data) => {
+    console.log('logging in...');
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (err) {
+      console.error(err);
+      alert(err);
+    }
+  };
 
-  const logOut = async () => {
-    console.log('logging out');
-  };
-  const test = async () => {
-    console.log('logging out');
-  };
+  // const logOut = async () => {
+  //   console.log('logging out');
+  // };
+  // const test = async () => {
+  //   console.log('logging out');
+  // };
 
   return (
     <>
@@ -94,24 +103,38 @@ const SignUpLogIn: React.FC<SignUpLoginProps> = ({ isLogin }) => {
           />
         </div>
       </form>
+      <>
+        {isLogin ? (
+          <div className='w-11/12 mx-auto flex items-center justify-center my-2 p-1 sm:border border-seconary rounded '>
+            <p className='text-xs p-1'>Don't have an account?</p>
+            <Link
+              to='/'
+              className='text-accent underline underline-offset-8 text-xs sm:text-sm'
+            >
+              Sign up
+            </Link>
+          </div>
+        ) : (
+          <div className='w-11/12 mx-auto flex items-center justify-center my-2 p-1 sm:border border-seconary rounded'>
+            <p className='text-xs p-1'>Already have an account?</p>
+            <Link
+              to='/login'
+              className='text-accent underline underline-offset-8 text-xs sm:text-sm'
+            >
+              Log in
+            </Link>
+          </div>
+        )}
+      </>
       <div className='flex flex-col justify-around items-center h-2/5 w-full mt-4'>
         <p className='text-sm text-primary'>-- OR -- </p>
-
-        <Button
-          isPrimary={false}
-          content={isLogin ? 'Log in with Google' : 'Sign up with Google'}
-          link={undefined}
-          clickHandler={test}
-        />
-        <Button
-          isPrimary={false}
-          content={isLogin ? 'Log in with Facebook' : 'Sign up with Facobook'}
-          link={undefined}
-          clickHandler={test}
+        <GoogleButton
+          label={isLogin ? 'Login with Google' : 'Sign in with Google'}
+          onClick={() => console.log('aaaaa')}
         />
       </div>
     </>
   );
 };
 
-export default SignUpLogIn;
+export default SignUpLogin;
