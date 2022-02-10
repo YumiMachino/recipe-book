@@ -9,10 +9,12 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import ComponentTest from './pages/ComponentTest';
 import Recipe from './pages/Recipe';
+//
+import { UserContextProvider } from './context/UserContext';
 
 function App() {
   return (
-    <div>
+    <UserContextProvider>
       <Routes>
         <Route path='/' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
@@ -24,7 +26,7 @@ function App() {
         {/* <Route path='signUp' element={<SignUp />} /> */}
         <Route path='/test' element={<ComponentTest />} />
       </Routes>
-    </div>
+    </UserContextProvider>
   );
 }
 

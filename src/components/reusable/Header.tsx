@@ -20,13 +20,13 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
         />
       </Link>
       <div className='flex'>
-        {isLoggedIn ? (
+        {!isLoggedIn ? (
           <>
             <div className='mx-3'>
-              <Button isPrimary={true} content='Sign up' link='/signup' />
+              <Button isPrimary={true} content='Sign up' link='/' />
             </div>
             <div className='mx-3'>
-              <Button isPrimary={false} content='Log in' link='/signup' />
+              <Button isPrimary={false} content='Log in' link='/login' />
             </div>
           </>
         ) : (
