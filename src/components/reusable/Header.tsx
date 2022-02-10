@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
         {!isLoggedIn ? (
           <>
             <div className='mx-3'>
-              <Button isPrimary={true} content='Sign up' link='/' />
+              <Button isPrimary={true} content='Sign up' link='/signup' />
             </div>
             <div className='mx-3'>
               <Button isPrimary={false} content='Log in' link='/login' />

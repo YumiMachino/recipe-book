@@ -32,27 +32,24 @@ const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
 
   const onSignUp: SubmitHandler<UserDataType> = async (data) => {
     console.log('Signing up...');
-
-    userContext.setUser({ email: data.email, password: data.password });
-    // try {
-    //   // await createUserWithEmailAndPassword(auth, data.email, data.password);
-    //   userContext.setUser({ email: data.email, password: data.password });
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      userContext.setUser({ email: data.email, password: data.password });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onLogin: SubmitHandler<UserDataType> = async (data) => {
     console.log('logging in...');
-    userContext.setUser({ email: 'asdasdfssdf', password: 'sdfsdfsdfsdf' });
-    // userContext.setUser({ email: data.email, password: data.password });
-    // try {
-    //   // await signInWithEmailAndPassword(auth, data.email, data.password);
-    //   userContext.setUser({ email: data.email, password: data.password });
-    // } catch (err) {
-    //   console.error(err);
-    //   alert(err);
-    // }
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      userContext.setUser({ email: data.email, password: data.password });
+      // change url parameter
+    } catch (err) {
+      console.error(err);
+      alert(err);
+    }
   };
 
   // const logOut = async () => {

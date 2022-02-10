@@ -16,9 +16,9 @@ function App() {
   return (
     <UserContextProvider>
       <Routes>
-        <Route path='/' element={<SignUp />} />
+        <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
-        {/* <Route path='/' element={<Top />} /> */}
+        <Route path='/' element={<Top />} />
         {/* <Route path='/results/:category' element={<SearchResult />} /> */}
         <Route path='/results/:id' element={<Recipe />} />{' '}
         <Route path='mypage' element={<MyPage />} />
