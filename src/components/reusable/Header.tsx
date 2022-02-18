@@ -5,11 +5,27 @@ import { IconContext } from 'react-icons';
 import { IoIosNotificationsOutline } from 'react-icons/io';
 import { HiUserCircle } from 'react-icons/hi';
 
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase-config';
+
 type HeaderProps = {
   isLoggedIn: boolean;
 };
 
 const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
+  const logout = () => {
+    console.log('logout します');
+    signOut(auth)
+      .then(() => {
+        // sign out suuccessful
+        console.log('sign out successful');
+      })
+      .catch((error) => {
+        // an error happend
+        console.log('sign out failed');
+      });
+  };
+
   return (
     <nav className='w-screen h-20 bg-secondary px-1 md:px-14 flex justify-between items-center'>
       <Link to='/'>
@@ -30,19 +46,28 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
             </div>
           </>
         ) : (
-          <IconContext.Provider
-            value={{
-              className:
-                'text-primary text-3xl md:text-4xl mx-3 transform hover:scale-105 transition-transform duration-300',
-            }}
-          >
-            <Link to='/'>
-              <IoIosNotificationsOutline />
-            </Link>
-            <Link to='/'>
-              <HiUserCircle />
-            </Link>
-          </IconContext.Provider>
+          <>
+            <IconContext.Provider
+              value={{
+                className:
+                  'text-primary text-3xl md:text-4xl mx-3 transform hover:scale-105 transition-transform duration-300',
+              }}
+            >
+              <Link to='/'>
+                <IoIosNotificationsOutline />
+              </Link>
+              <Link to='/'>
+                <HiUserCircle />
+              </Link>
+            </IconContext.Provider>
+            <div className='mx-3'>
+              <Button
+                isPrimary={false}
+                content='Log out'
+                clickHandler={logout}
+              />
+            </div>
+          </>
         )}
       </div>
     </nav>

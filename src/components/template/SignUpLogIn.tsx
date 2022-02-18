@@ -16,11 +16,6 @@ type SignUpLoginProps = {
   isLogin: boolean;
 };
 
-// export interface UserDataType {
-//   email: string;
-//   password: string;
-// }
-
 const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
   const userContext = useContext(UserContext);
 
@@ -32,24 +27,37 @@ const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
 
   const onSignUp: SubmitHandler<UserDataType> = async (data) => {
     console.log('Signing up...');
-    try {
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
-      userContext.setUser({ email: data.email, password: data.password });
-    } catch (err) {
-      console.log(err);
-    }
+
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // userContext.setUser({ email: data.email, password: data.password });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('code: ', errorCode);
+        console.log('message: ', errorMessage);
+      });
   };
 
   const onLogin: SubmitHandler<UserDataType> = async (data) => {
     console.log('logging in...');
-    try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
-      userContext.setUser({ email: data.email, password: data.password });
-      // change url parameter
-    } catch (err) {
-      console.error(err);
-      alert(err);
-    }
+
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log('user: ', user);
+        // userContext.setUser({ email: data.email, password: data.password });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   // const logOut = async () => {
