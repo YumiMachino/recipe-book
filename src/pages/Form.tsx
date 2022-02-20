@@ -5,11 +5,8 @@ import { RecipeDataType, formInitialState } from '../data/DataType';
 import FormOverview from '../components/template/form/FormOverview';
 import Ingredients from '../components/template/form/Ingredients';
 import RecipeSteps from '../components/template/form/RecipeSteps';
-import { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
 
 const Form = () => {
-  const userContext = useContext(UserContext);
   const methods = useForm<RecipeDataType>({
     defaultValues: formInitialState,
   });
@@ -26,7 +23,7 @@ const Form = () => {
   };
 
   return (
-    <Layout isLoggedIn={userContext.user ? true : false}>
+    <Layout>
       <FormProvider {...methods}>
         <form
           className='w-full sm:w-4/5 lg:w-3/5 mx-auto p-1  mt-2 md:mt-9 flex flex-col justify-between'
