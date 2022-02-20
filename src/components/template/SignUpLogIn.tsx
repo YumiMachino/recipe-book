@@ -1,3 +1,4 @@
+import { useState, useContext } from 'react';
 import Button from '../reusable/Button';
 import GoogleButton from 'react-google-button';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -7,9 +8,8 @@ import {
 } from 'firebase/auth';
 
 import { auth } from '../../firebase-config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserDataType } from '../../data/UserData';
-import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 
 type SignUpLoginProps = {
@@ -17,7 +17,9 @@ type SignUpLoginProps = {
 };
 
 const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
+  const navigate = useNavigate();
   const userContext = useContext(UserContext);
+  const [error, setError] = useState<null | string>(null);
 
   const {
     register,
@@ -26,46 +28,51 @@ const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
   } = useForm<UserDataType>();
 
   const onSignUp: SubmitHandler<UserDataType> = async (data) => {
-    console.log('Signing up...');
-
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        // userContext.setUser({ email: data.email, password: data.password });
+        userContext.setUser({ email: data.email, password: data.password });
+        navigate('/');
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log('code: ', errorCode);
-        console.log('message: ', errorMessage);
+        if (errorCode === 'auth/email-already-in-use') {
+          setError('Error: Email already in use');
+          setTimeout(() => {
+            navigate('/login');
+          }, 3000);
+        } else {
+          setError(errorMessage);
+        }
       });
   };
 
   const onLogin: SubmitHandler<UserDataType> = async (data) => {
-    console.log('logging in...');
-
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
         console.log('user: ', user);
-        // userContext.setUser({ email: data.email, password: data.password });
+        userContext.setUser({ email: data.email, password: data.password });
+        navigate('/');
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        if (errorCode === 'auth/user-not-found') {
+          setError('Error: User not found.');
+          setTimeout(() => {
+            navigate('/signup');
+          }, 3000);
+        } else {
+          setError(errorMessage);
+        }
       });
   };
-
-  // const logOut = async () => {
-  //   console.log('logging out');
-  // };
-  // const test = async () => {
-  //   console.log('logging out');
-  // };
 
   return (
     <>
@@ -73,6 +80,7 @@ const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
         onSubmit={isLogin ? handleSubmit(onLogin) : handleSubmit(onSignUp)}
         className='flex flex-col justify-around h-3/5'
       >
+        {error && <span className='text-sm text-accent'>{error}</span>}
         <div className='flex flex-col'>
           <label className='text-xs text-dark pb-1'>Email</label>
           <input
@@ -124,7 +132,7 @@ const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
           <div className='w-11/12 mx-auto flex items-center justify-center my-2 p-1 sm:border border-seconary rounded '>
             <p className='text-xs p-1'>Don't have an account?</p>
             <Link
-              to='/'
+              to='/signup'
               className='text-accent underline underline-offset-8 text-xs sm:text-sm'
             >
               Sign up

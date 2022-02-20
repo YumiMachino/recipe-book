@@ -7,6 +7,7 @@ import MainHeading from '../components/reusable/MainHeading';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 
+// User objectがnullの場合はsignupページにリダイレクト
 const Top = () => {
   const userContext = useContext(UserContext);
   return (

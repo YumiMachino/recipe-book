@@ -7,18 +7,26 @@ import { HiUserCircle } from 'react-icons/hi';
 
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebase-config';
+import { UserContext } from '../../context/UserContext';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type HeaderProps = {
   isLoggedIn: boolean;
 };
 
 const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
+  const navigate = useNavigate();
+  const userContext = useContext(UserContext);
+
   const logout = () => {
-    console.log('logout します');
     signOut(auth)
       .then(() => {
         // sign out suuccessful
         console.log('sign out successful');
+        userContext.setUser(null);
+        // signup 画面にリダイレクト
+        navigate('/signup');
       })
       .catch((error) => {
         // an error happend

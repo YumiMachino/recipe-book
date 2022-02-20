@@ -20,21 +20,22 @@ type UserContextProviderProps = {
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<UserDataType | null>(null);
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
+  //state変更の限り実行し続ける
+  // onAuthStateChanged(auth, (user) => {
+  //   if (user) {
+  //     // User is signed in, see docs for a list of available properties
+  //     // https://firebase.google.com/docs/reference/js/firebase.User
 
-      console.log('user is signed in ');
-      setUser({ email: 'adasdasdasfa', password: 'adasadfdsfsdf' });
-      // ...
-    } else {
-      // User is signed out
-      // ...
-      console.log('user is signed out ');
-      setUser(null);
-    }
-  });
+  //     console.log('user is signed in ', user);
+  //     setUser({ email: 'adasdasdasfa', password: 'adasadfdsfsdf' });
+  //     // ...
+  //   } else {
+  //     // User is signed out
+  //     // ...
+  //     console.log('user is signed out ', user);
+  //     setUser(null);
+  //   }
+  // });
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -42,3 +43,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     </UserContext.Provider>
   );
 };
+
+// user sign in-> store user email, uid to database(with empty properties such us recipes)
+
+// mypage -> uid からユーザー情報を引っ張ってくる
