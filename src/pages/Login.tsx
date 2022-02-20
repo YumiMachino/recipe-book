@@ -3,9 +3,8 @@ import SignUpLogIn from '../components/template/SignUpLogin';
 import demoImg from '../assets/demo.jpg';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
-import { Link } from 'react-router-dom';
 
-const SignUp = () => {
+const Login = () => {
   const userContext = useContext(UserContext);
   return (
     <Layout isLoggedIn={userContext.user ? true : false}>
@@ -16,13 +15,13 @@ const SignUp = () => {
 
         <div className='w-11/12 h-full sm:w-8/12  mx-auto flex flex-col p-4 m-1 sm:border border-seconary rounded '>
           <h1 className='text-lg p-2 text-center text-dark font-semibold '>
-            Sign up
+            Log in
           </h1>
-          <SignUpLogIn isLogin={false} />
+          <SignUpLogIn isLogin={true} />
         </div>
       </div>
     </Layout>
   );
 };
 
-export default SignUp;
+export default Login;
