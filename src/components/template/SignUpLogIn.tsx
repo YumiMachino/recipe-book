@@ -11,12 +11,14 @@ import { auth } from '../../firebase-config';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserDataType } from '../../data/UserData';
 import { UserContext } from '../../context/UserContext';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 type SignUpLoginProps = {
   isLogin: boolean;
 };
 
 const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
+  const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const userContext = useContext(UserContext);
   const [error, setError] = useState<null | string>(null);
@@ -71,6 +73,34 @@ const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
         } else {
           setError(errorMessage);
         }
+      });
+  };
+
+  const googleSignIn = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        console.log('google user', user);
+        const email = user.email as string;
+        const pass = user.uid;
+        userContext.setUser({ email: email, password: pass });
+        navigate('/');
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        setError(`Error: ${errorMessage}`);
+        // ...
       });
   };
 
@@ -154,7 +184,7 @@ const SignUpLogin: React.FC<SignUpLoginProps> = ({ isLogin }) => {
         <p className='text-sm text-primary'>-- OR -- </p>
         <GoogleButton
           label={isLogin ? 'Login with Google' : 'Sign in with Google'}
-          onClick={() => console.log('aaaaa')}
+          onClick={googleSignIn}
         />
       </div>
     </>
